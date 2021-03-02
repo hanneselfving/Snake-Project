@@ -8,12 +8,15 @@ namespace SnakeProjekt
 	{
 		MainForm Form = new MainForm();
 		Timer Timer = new Timer();
+		const int FPS = 30;
+
+		Player Player1, Player2;
 
 		public void Run()
 		{
             Form.Paint += Render;
 			Timer.Tick += TimerEventHandler;
-			Timer.Interval = 1000/25;
+			Timer.Interval = 1000/FPS;
 			Timer.Start();
 
 			Application.Run(Form);
@@ -28,6 +31,11 @@ namespace SnakeProjekt
 		{
 		
 		}
+
+		void Tick()
+        {
+
+        }
 
 	}
 }
