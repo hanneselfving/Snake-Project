@@ -19,8 +19,6 @@ namespace SnakeProjekt
 			Timer.Interval = 1000/FPS;
 			Timer.Start();
 
-			KeyDown += Move;
-
 			Application.Run(Form);
 
 
