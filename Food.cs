@@ -11,6 +11,10 @@ namespace Snake
         Random r = new Random();
         private int windowHight;
         private int windowWidth;
+        
+        //Hej
+        //På
+        //Dig
 
     }        
 
