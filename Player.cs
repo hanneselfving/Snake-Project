@@ -10,7 +10,7 @@ namespace SnakeProjekt
     public class Player
     {
 
-        int[999, 999] arr;
+        int[,] arr = new int[999,999];
         List<Dot> Dots = new List<Dot>();
         float Speed;
         public enum Direction { Left, Right, Down, Up }
