@@ -23,7 +23,7 @@ namespace SnakeProjekt
 
         public void Render(PaintEventArgs g)
         {
-            Dots head = new Dots();
+            Dot head = new Dot();
             head.X = 10;
             head.Y = 10;
         }
