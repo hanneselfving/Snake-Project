@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Windows.Forms;
 
-
-namespace SnakeProjekt
+namespace Snake
 {
-	public class MainForm : Form
-	{
-		public MainForm() : base()
-		{
-			Text = "Snake";
-			Width = 800;
-			Height = 600;
-			DoubleBuffered = true;
-		}
-	}
+    public class MainForm : Form
+    {
+        public MainForm() : base()
+        {
+            Text = "Snake";
+            Width = 800;
+            Height = 600;
+            DoubleBuffered = true;
+        }
+    }
 }

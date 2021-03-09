@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -11,6 +11,12 @@ namespace Snake
         Random r = new Random();
         private int windowHight;
         private int windowWidth;
+        private const int foodSize = 123;
+        
+        public void Tick()
+        {
+
+        }
 
     }        
 
