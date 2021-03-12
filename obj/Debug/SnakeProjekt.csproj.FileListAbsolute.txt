@@ -7,3 +7,9 @@ C:\Users\erik\Google Drive\Skolan\Mälardalens högskola datavetenskap 2020\Obej
 C:\Users\erik\Google Drive\Skolan\Mälardalens högskola datavetenskap 2020\Obejektorienterad programmering DVA222\SnakeProjekt\obj\Debug\SnakeProjekt.csproj.CoreCompileInputs.cache
 C:\Users\erik\Google Drive\Skolan\Mälardalens högskola datavetenskap 2020\Obejektorienterad programmering DVA222\SnakeProjekt\obj\Debug\SnakeProjekt.exe
 C:\Users\erik\Google Drive\Skolan\Mälardalens högskola datavetenskap 2020\Obejektorienterad programmering DVA222\SnakeProjekt\obj\Debug\SnakeProjekt.pdb
+C:\Users\Hannes\source\repos\SnakeProjectRE\obj\Debug\SnakeProjekt.csprojAssemblyReference.cache
+C:\Users\Hannes\source\repos\SnakeProjectRE\obj\Debug\SnakeProjekt.Properties.Resources.resources
+C:\Users\Hannes\source\repos\SnakeProjectRE\obj\Debug\SnakeProjekt.csproj.GenerateResource.cache
+C:\Users\Hannes\source\repos\SnakeProjectRE\obj\Debug\SnakeProjekt.csproj.CoreCompileInputs.cache
+C:\Users\Hannes\source\repos\SnakeProjectRE\obj\Debug\SnakeProjekt.exe
+C:\Users\Hannes\source\repos\SnakeProjectRE\obj\Debug\SnakeProjekt.pdb

@@ -11,7 +11,15 @@ namespace SnakeProjekt
 		Timer Timer = new Timer();
 		const int FPS = 30;
 
-		Player Player1, Player2;
+		public static Player Player1, Player2;
+		public static LinkedList<Food> FoodList = new LinkedList<Food>();
+
+		public Engine()
+        {
+			Player1 = new Player(PlayerColor.Blue);
+			Player2 = new Player(PlayerColor.Green);
+        }
+
 
 		public void Run()
 		{
@@ -34,14 +42,23 @@ namespace SnakeProjekt
 
 		void Render(Object obj, PaintEventArgs args)
 		{
-
-
+			Player1.Render(args.Graphics);
+			Player2.Render(args.Graphics);
+			foreach(Food food in FoodList)
+            {
+				food.Render(args.Graphics);
+            }
 
 		}
 
 		void Tick()
 		{
-
+			Player1.Tick();
+			Player2.Tick();
+			foreach(Food food in FoodList)
+            {
+				food.Tick();
+            }
 		}
 
 		// Handle the KeyDown.

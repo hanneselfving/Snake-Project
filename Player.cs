@@ -14,13 +14,14 @@ namespace SnakeProjekt
     public class Player
     {
 
-        int[,] arr = new int[999, 999];
-        List<Dot> Snake = new List<Dot>();
+        
+        LinkedList<Dot> Snake = new LinkedList<Dot>();
         Pen Pen;
+        Dot Head;
 
         public Player(PlayerColor color)
         {
-            Dot head = new Dot(400, 250);
+            this.Head = new Dot(400, 250);
             if (color == PlayerColor.Green)
             {
                 Pen = new Pen(Color.FromArgb(255, 0, 255, 0), 10);
@@ -30,14 +31,14 @@ namespace SnakeProjekt
                 Pen = new Pen(Color.FromArgb(255, 0, 0, 255), 10);
             }
 
-            Snake.Add(head);
+            Snake.Add(Head);
         }
 
         public void Tick()
         {
-            foreach (food in Food)
+            foreach (Food food in Engine.FoodList)
             {
-                if (head.X == food.x && head.Y == food.Y)
+                if (Head.X == food.x && Head.Y == food.Y)
                 {
                     switch (food.lengthAdd)
                     {
@@ -67,17 +68,15 @@ namespace SnakeProjekt
 
         public void Render(Graphics g)
         {
-
-
-            foreach (Dot in Snake)
+            foreach (Dot dot in Snake)
             {
-                g.DrawRectangle(Pen, Dot.X, Dot.Y, 10, 10);
+                g.DrawRectangle(Pen, dot.X, dot.Y, 10, 10);
             }
         }
 
         public void Move(Direction d)
         {
-            for (i = Snake.Count; i > 0; i--)
+            for (int i = Snake.Count; i > 0; i--)
             {
                 if (i != 0)
                 {
@@ -89,30 +88,30 @@ namespace SnakeProjekt
                     switch (d)
                     {
                         case Direction.Left:
-                            if (head.X >= 10)
+                            if (Head.X >= 10)
                             {
-                                head.X -= 10;
+                                Head.X -= 10;
                             }
                             break;
 
                         case Direction.Right:
-                            if (head.X < 1000)
+                            if (Head.X < 1000)
                             {
-                                head.X += 10;
+                                Head.X += 10;
                             }
                             break;
 
                         case Direction.Up:
-                            if (head.Y < 1000)
+                            if (Head.Y < 1000)
                             {
-                                head.Y -= 10;
+                                Head.Y -= 10;
                             }
                             break;
 
                         case Direction.Down:
-                            if (head.Y >= 10)
+                            if (Head.Y >= 10)
                             {
-                                head.Y += 10;
+                                Head.Y += 10;
                             }
                             break;
                     }
