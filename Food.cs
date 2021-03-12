@@ -26,9 +26,10 @@ namespace SnakeProjekt
 
         public override void Tick()
         {
-            Timer = new System.Timers.Timer(15000);
+            Timer = new System.Timers.Timer(15);
             Timer.AutoReset = false;
             Timer.Enabled = true;
+            Timer.Interval = 1000;
             Timer.Start();
 
             if (Timer.Enabled == false)
@@ -59,9 +60,10 @@ namespace SnakeProjekt
 
         public override void Tick()
         {
-            Timer = new System.Timers.Timer(5000);
+            Timer = new System.Timers.Timer(5);
             Timer.AutoReset = false;
             Timer.Enabled = true;
+            Timer.Interval = 1000;
             Timer.Start();
 
             if (Timer.Enabled == false)
@@ -91,9 +93,10 @@ namespace SnakeProjekt
 
         public override void Tick()
         {
-            Timer = new System.Timers.Timer(5000);
+            Timer = new System.Timers.Timer(5);
             Timer.AutoReset = false;
             Timer.Enabled = true;
+            Timer.Interval = 1000;
             Timer.Start();
 
             if (Timer.Enabled == false)
