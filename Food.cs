@@ -1,35 +1,119 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Drawing;
+using System.Timers;
 
-namespace Snake
+namespace SnakeProjekt
 {
-    public class Food
+    abstract public class Food
     {
-        private int x, y;
+        protected int x, y, size = 5;
+        public bool Expired = false;
+        protected System.Timers.Timer Timer;
 
-        Random r = new Random();
-        private int windowHight;
-        private int windowWidth;
+        abstract public void Tick();
+        abstract public void Render(PaintEventArgs g);
 
-    }        
+
+    }
 
 
     public class Standard : Food
     {
         int point = 1;
         int lengthAdd = 1;
+
+        public override void Tick()
+        {
+            Timer = new System.Timers.Timer(15000);
+            Timer.AutoReset = false;
+            Timer.Enabled = true;
+            Timer.Start();
+
+            if (Timer.Enabled == false)
+                Expired = true;
+
+            if (Expired == true)
+            {
+                Timer.Stop();
+                Timer.Dispose();
+            }
+
+
+        }
+
+        Pen pen = new Pen(Color.FromArgb(255, 0, 0));
+        public override void Render(PaintEventArgs g)
+        {
+            g.Graphics.DrawEllipse(pen, x, y, size, size);
+            pen.Dispose();
+        }
+
     }
 
     public class Valuable : Food
     {
         int point = 5;
         int lengthAdd = 2;
+
+        public override void Tick()
+        {
+            Timer = new System.Timers.Timer(5000);
+            Timer.AutoReset = false;
+            Timer.Enabled = true;
+            Timer.Start();
+
+            if (Timer.Enabled == false)
+                Expired = true;
+
+            if (Expired == true)
+            {
+                Timer.Stop();
+                Timer.Dispose();
+            }
+
+
+        }
+
+        Pen pen = new Pen(Color.FromArgb(0, 255, 0));
+        public override void Render(PaintEventArgs g)
+        {
+            g.Graphics.DrawEllipse(pen, x, y, size, size);
+
+        }
     }
 
     public class Diet : Food
     {
         int point = 1;
         int lengthAdd = -1;
+
+        public override void Tick()
+        {
+            Timer = new System.Timers.Timer(5000);
+            Timer.AutoReset = false;
+            Timer.Enabled = true;
+            Timer.Start();
+
+            if (Timer.Enabled == false)
+                Expired = true;
+
+            if (Expired == true)
+            {
+                Timer.Stop();
+                Timer.Dispose();
+            }
+
+
+        }
+
+        Pen pen = new Pen(Color.FromArgb(0, 0, 255));
+        public override void Render(PaintEventArgs g)
+        {
+            g.Graphics.DrawEllipse(pen, x, y, size, size);
+
+        }
     }
 }
+
