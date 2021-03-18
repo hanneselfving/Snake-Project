@@ -15,6 +15,10 @@ namespace SnakeProjekt
         public MainForm()
         {
             InitializeComponent();
+            Text = "Snake";
+            Width = 800;
+            Height = 600;
+            DoubleBuffered = true;
         }
     }
 }

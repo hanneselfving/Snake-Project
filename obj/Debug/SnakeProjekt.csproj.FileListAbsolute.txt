@@ -13,3 +13,6 @@ C:\Users\Hannes\source\repos\SnakeProjectRE\obj\Debug\SnakeProjekt.csproj.Genera
 C:\Users\Hannes\source\repos\SnakeProjectRE\obj\Debug\SnakeProjekt.csproj.CoreCompileInputs.cache
 C:\Users\Hannes\source\repos\SnakeProjectRE\obj\Debug\SnakeProjekt.exe
 C:\Users\Hannes\source\repos\SnakeProjectRE\obj\Debug\SnakeProjekt.pdb
+C:\Users\Hannes\source\repos\SnakeProjectRE\bin\Debug\SnakeProjekt.exe.config
+C:\Users\Hannes\source\repos\SnakeProjectRE\bin\Debug\SnakeProjekt.exe
+C:\Users\Hannes\source\repos\SnakeProjectRE\bin\Debug\SnakeProjekt.pdb

@@ -25,6 +25,7 @@ namespace SnakeProjekt
 		{
 			Form.Paint += Render;
 			Timer.Tick += TimerEventHandler;
+			Form.KeyDown += OnKeyDown;
 			Timer.Interval = 1000 / FPS;
 			Timer.Start();
 
@@ -37,6 +38,7 @@ namespace SnakeProjekt
 
 		void TimerEventHandler(Object obj, EventArgs args)
 		{
+			Tick();
 			Form.Refresh();
 		}
 
@@ -46,7 +48,7 @@ namespace SnakeProjekt
 			Player2.Render(args.Graphics);
 			foreach(Food food in FoodList)
             {
-				food.Render(args.Graphics);
+				//food.Render(args.Graphics);
             }
 
 		}
@@ -67,16 +69,16 @@ namespace SnakeProjekt
 			switch (e.KeyCode)
 			{
 				case Keys.A:
-					//left
+					Player1.curdir = Direction.Left;
 					break;
 				case Keys.D:
-					//right
+					Player1.curdir = Direction.Right;
 					break;
 				case Keys.W:
-					//up
+					Player1.curdir = Direction.Up;
 					break;
 				case Keys.S:
-					//down
+					Player1.curdir = Direction.Down;
 					break;
 			}
 		}

@@ -14,14 +14,23 @@ namespace SnakeProjekt
     public class Player
     {
 
-        
-        LinkedList<Dot> Snake = new LinkedList<Dot>();
+
+        Dot[] Snake;
+        public int Count { get; set; }
+        int Speed = 10;
+        private Direction CurDir = Direction.Up;
+        public Direction curdir { get => CurDir; set => CurDir = value; }
         Pen Pen;
-        Dot Head;
+        private Direction curDir;
 
         public Player(PlayerColor color)
         {
-            this.Head = new Dot(400, 250);
+            Snake = new Dot[999];
+            Count = 3;
+            for (int i = 0; i < Count; i++)
+            {
+                Snake[i] = new Dot(400, 200 + Dot.SIZE * i);
+            }
             if (color == PlayerColor.Green)
             {
                 Pen = new Pen(Color.FromArgb(255, 0, 255, 0), 10);
@@ -30,33 +39,28 @@ namespace SnakeProjekt
             {
                 Pen = new Pen(Color.FromArgb(255, 0, 0, 255), 10);
             }
-
-            Snake.Add(Head);
         }
 
         public void Tick()
         {
+            Move(CurDir);
             foreach (Food food in Engine.FoodList)
             {
-                if (Head.X == food.x && Head.Y == food.Y)
+                if (Snake[0].X == food.x && Snake[0].Y == food.y)
                 {
-                    switch (food.lengthAdd)
+                    switch (1) //NOTE: CHANGE LATER
                     {
                         case 1:
-                            var dot = new Dot(Snake[Snake.Count - 1].X, Snake[Snake.Count - 1].Y);
-                            Snake.Add(dot);
+                            Count++;
                             break;
 
                         case 2:
-                            var dot = new Dot(Snake[Snake.Count - 1].X, Snake[Snake.Count - 1].Y);
-                            Snake.Add(dot);
-                            var dot = new Dot(Snake[Snake.Count - 1].X, Snake[Snake.Count - 1].Y);
-                            Snake.Add(dot);
+                            Count++;
                             break;
 
                         case -1:
-                            if (Snake.Count > 1)
-                                Snake.RemoveAt(Snake.Count - 1);
+                            if (Count > 1)
+                                Count--;
                             break;
                     }
 
@@ -68,59 +72,43 @@ namespace SnakeProjekt
 
         public void Render(Graphics g)
         {
-            foreach (Dot dot in Snake)
+            for (int i = 0; i < Count; i++)
             {
-                g.DrawRectangle(Pen, dot.X, dot.Y, 10, 10);
+                g.DrawRectangle(Pen, Snake[i].X, Snake[i].Y, Dot.SIZE, Dot.SIZE);
             }
         }
-
         public void Move(Direction d)
         {
-            for (int i = Snake.Count; i > 0; i--)
+
+            for (int i = Count - 1; i > 0; i--) //Move tail
             {
-                if (i != 0)
-                {
-                    Snake[i].X = Snake[i - 1].X;
-                    Snake[i].Y = Snake[i - 1].Y;
-                }
-                else
-                {
-                    switch (d)
-                    {
-                        case Direction.Left:
-                            if (Head.X >= 10)
-                            {
-                                Head.X -= 10;
-                            }
-                            break;
 
-                        case Direction.Right:
-                            if (Head.X < 1000)
-                            {
-                                Head.X += 10;
-                            }
-                            break;
-
-                        case Direction.Up:
-                            if (Head.Y < 1000)
-                            {
-                                Head.Y -= 10;
-                            }
-                            break;
-
-                        case Direction.Down:
-                            if (Head.Y >= 10)
-                            {
-                                Head.Y += 10;
-                            }
-                            break;
-                    }
-
-                }
+                Snake[i].X = Snake[i - 1].X;
+                Snake[i].Y = Snake[i - 1].Y;
 
             }
 
-        }
+            switch (d) // Move head
+            {
+                case Direction.Up:
+                    Snake[0].Y -= Speed;
+                    break;
+                case Direction.Down:
+                    Snake[0].Y += Speed;
+                    break;
+                case Direction.Left:
+                    Snake[0].X -= Speed;
+                    break;
+                case Direction.Right:
+                    Snake[0].X += Speed;
+                    break;
+            }
 
+        }
     }
+
+
+
+
+
 }
