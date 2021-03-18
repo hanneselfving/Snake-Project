@@ -14,7 +14,6 @@ namespace SnakeProjekt
     public class Player
     {
 
-
         Dot[] Snake;
         public int Count { get; set; }
         int Speed = 10;

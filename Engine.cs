@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace SnakeProjekt
 {
@@ -11,8 +12,15 @@ namespace SnakeProjekt
 		Timer Timer = new Timer();
 		const int FPS = 30;
 
+		bool running = false;
+		public bool Running { get => running; set => running = value;}
+
 		public static Player Player1, Player2;
 		public static LinkedList<Food> FoodList = new LinkedList<Food>();
+
+		 // Create font and brush.
+		Font drawFont = new Font("Times New Roman", 16);
+		SolidBrush drawBrush = new SolidBrush(Color.Black);
 
 		public Engine()
         {
@@ -31,9 +39,6 @@ namespace SnakeProjekt
 
 			Application.Run(Form);
 
-
-
-
 		}
 
 		void TimerEventHandler(Object obj, EventArgs args)
@@ -44,6 +49,10 @@ namespace SnakeProjekt
 
 		void Render(Object obj, PaintEventArgs args)
 		{
+			if(!running)
+            {
+				args.Graphics.DrawString("Press F to run", drawFont, drawBrush, 325, 10);
+            }
 			Player1.Render(args.Graphics);
 			Player2.Render(args.Graphics);
 			foreach(Food food in FoodList)
@@ -55,12 +64,14 @@ namespace SnakeProjekt
 
 		void Tick()
 		{
+			if(Running) { 
 			Player1.Tick();
 			Player2.Tick();
 			foreach(Food food in FoodList)
             {
 				food.Tick();
             }
+			}
 		}
 
 		// Handle the KeyDown.
@@ -68,6 +79,15 @@ namespace SnakeProjekt
 		{
 			switch (e.KeyCode)
 			{
+				case Keys.F:
+					if(Running) { 
+					Running = false;
+						}
+                    else { 
+					Running = true;
+					}
+					break;
+
 				case Keys.A:
 					Player1.curdir = Direction.Left;
 					break;
@@ -80,6 +100,20 @@ namespace SnakeProjekt
 				case Keys.S:
 					Player1.curdir = Direction.Down;
 					break;
+
+				case Keys.J:
+					Player2.curdir = Direction.Left;
+					break;
+				case Keys.L:
+					Player2.curdir = Direction.Right;
+					break;
+				case Keys.I:
+					Player2.curdir = Direction.Up;
+					break;
+				case Keys.K:
+					Player2.curdir = Direction.Down;
+					break;
+
 			}
 		}
 
