@@ -21,21 +21,28 @@ namespace SnakeProjekt
         public Direction curdir { get => CurDir; set => CurDir = value; }
         Pen Pen;
         private Direction curDir;
+        Engine Engine;
 
-        public Player(PlayerColor color)
+        public Player(PlayerColor color, Engine engine)
         {
             Snake = new Dot[999];
+            Engine = engine;
             Count = 3;
-            for (int i = 0; i < Count; i++)
-            {
-                Snake[i] = new Dot(400, 200 + Dot.SIZE * i);
-            }
+      
             if (color == PlayerColor.Green)
             {
+                for (int i = 0; i < Count; i++)
+                {
+                    Snake[i] = new Dot(395, 200 + Dot.SIZE * i);
+                }
                 Pen = new Pen(Color.FromArgb(255, 0, 255, 0), 10);
             }
             else
             {
+                for (int i = 0; i < Count; i++)
+                {
+                    Snake[i] = new Dot(395, 300 + Dot.SIZE * i);
+                }
                 Pen = new Pen(Color.FromArgb(255, 0, 0, 255), 10);
             }
         }
@@ -66,7 +73,7 @@ namespace SnakeProjekt
 
                 }
             }
-
+            CollideWall();
         }
 
         public void Render(Graphics g)
@@ -103,6 +110,26 @@ namespace SnakeProjekt
                     break;
             }
 
+        }
+
+        public void CollideWall()
+        {
+            if(Snake[0].X < 10 || Snake[0].X > 765 || Snake[0].Y < 10 || Snake[0].Y > 540)
+            {
+                Engine.Running = false;
+            }
+    
+        }
+
+        public void CollidePlayer(Player OtherPlayer)
+        {
+            for(int k=0; k < OtherPlayer.Count; k++)
+            {
+                if (Snake[0].X == OtherPlayer.Snake[k].X && Snake[0].Y == OtherPlayer.Snake[k].Y)
+                {
+                    Engine.Running = false;
+                }
+            }
         }
     }
 

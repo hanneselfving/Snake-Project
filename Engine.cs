@@ -24,8 +24,8 @@ namespace SnakeProjekt
 
 		public Engine()
         {
-			Player1 = new Player(PlayerColor.Blue);
-			Player2 = new Player(PlayerColor.Green);
+			Player1 = new Player(PlayerColor.Blue, this);
+			Player2 = new Player(PlayerColor.Green, this);
         }
 
 
@@ -67,12 +67,21 @@ namespace SnakeProjekt
 			if(Running) { 
 			Player1.Tick();
 			Player2.Tick();
-			foreach(Food food in FoodList)
+			Player1.CollidePlayer(Player2);
+			Player2.CollidePlayer(Player1);
+
+				foreach (Food food in FoodList)
             {
 				food.Tick();
             }
 			}
-		}
+            else
+            {
+                Player1 = new Player(PlayerColor.Blue, this);
+                Player2 = new Player(PlayerColor.Green, this);
+
+            }
+        }
 
 		// Handle the KeyDown.
 		private void OnKeyDown(object sender, KeyEventArgs e)
@@ -116,8 +125,6 @@ namespace SnakeProjekt
 
 			}
 		}
-
-
 
 	}
 }
