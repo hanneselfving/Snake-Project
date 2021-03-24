@@ -77,10 +77,8 @@ namespace SnakeProjekt
 		void Tick()
 		{
 			if(Running) { 
-			Player1.Tick();
-			Player2.Tick();
-			Player1.CollidePlayer(Player2);
-			Player2.CollidePlayer(Player1);
+			Player1.Tick(Player2);
+			Player2.Tick(Player1);
 
 				foreach (Food food in FoodList)
             {
@@ -137,6 +135,11 @@ namespace SnakeProjekt
 
 			}
 		}
+
+		public void Reset()
+        {
+			running = false;
+        }
 
 	}
 }
