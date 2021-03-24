@@ -1,0 +1,3 @@
+Fixa UI.
+Fixa start skärm och start. (Där man kan se kontrollerna för varje spelare)
+Fixa slut skärm och slut.

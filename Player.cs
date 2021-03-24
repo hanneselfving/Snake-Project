@@ -17,8 +17,10 @@ namespace SnakeProjekt
         Dot[] Snake;
         public int Count { get; set; }
         int Speed = 10;
+        int score = 0;
         private Direction CurDir = Direction.Up;
         public Direction curdir { get => CurDir; set => CurDir = value; }
+        public int Score { get => score; set => score = value; }
         Pen Pen;
         private Direction curDir;
         Engine Engine;
@@ -28,12 +30,13 @@ namespace SnakeProjekt
             Snake = new Dot[999];
             Engine = engine;
             Count = 3;
+            int SpawnX = 380;
       
             if (color == PlayerColor.Green)
             {
                 for (int i = 0; i < Count; i++)
                 {
-                    Snake[i] = new Dot(395, 200 + Dot.SIZE * i);
+                    Snake[i] = new Dot(SpawnX, 200 + Dot.SIZE * i);
                 }
                 Pen = new Pen(Color.FromArgb(255, 0, 255, 0), 10);
             }
@@ -41,7 +44,7 @@ namespace SnakeProjekt
             {
                 for (int i = 0; i < Count; i++)
                 {
-                    Snake[i] = new Dot(395, 300 + Dot.SIZE * i);
+                    Snake[i] = new Dot(SpawnX, 300 + Dot.SIZE * i);
                 }
                 Pen = new Pen(Color.FromArgb(255, 0, 0, 255), 10);
             }

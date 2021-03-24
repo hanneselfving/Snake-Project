@@ -52,13 +52,22 @@ namespace SnakeProjekt
 			if(!running)
             {
 				args.Graphics.DrawString("Press F to run", drawFont, drawBrush, 325, 10);
+				args.Graphics.DrawString("Controls: WASD and IJKL", drawFont, drawBrush, 290, 30);
+				//args.Graphics.DrawString($"W:{Form.Size.Width} H:{Form.Size.Height}", drawFont, drawBrush, 300, 50);
+			
             }
 			Player1.Render(args.Graphics);
 			Player2.Render(args.Graphics);
+			if(Running) { 
 			foreach(Food food in FoodList)
             {
 				//food.Render(args.Graphics);
             }
+				drawBrush.Color = Color.FromArgb(255, 0, 255, 0);
+				args.Graphics.DrawString($"{Player1.Score}", drawFont, drawBrush, 5, 5);
+				drawBrush.Color = Color.FromArgb(255, 0, 0, 255);
+				args.Graphics.DrawString($"{Player2.Score}", drawFont, drawBrush, 759, 5);
+			}
 
 		}
 
