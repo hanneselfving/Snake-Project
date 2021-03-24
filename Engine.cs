@@ -36,7 +36,8 @@ namespace SnakeProjekt
 			Form.KeyDown += OnKeyDown;
 			Timer.Interval = 1000 / FPS;
 			Timer.Start();
-
+			CreatFood();
+			
 			Application.Run(Form);
 
 		}
@@ -66,7 +67,7 @@ namespace SnakeProjekt
 			if(Running) { 
 			foreach(Food food in FoodList)
             {
-				//food.Render(args.Graphics);
+				food.Render(args.Graphics);
             }
 				drawBrush.Color = Color.Blue;
 				args.Graphics.DrawString($"{Player1.Score}", drawFont, drawBrush, 5, 5);
@@ -79,7 +80,71 @@ namespace SnakeProjekt
 			}
 
 		}
+		
+		void CreatFood()
+		{
+			Random r = new Random();
 
+			for (int i = FoodList.Count; i < 15; i++)
+			{
+				bool newplace = false;
+
+				int x;
+				int y;
+				do
+				{
+					x = r.Next(Form.Width-50);
+					y = r.Next(Form.Height-75);
+
+					if (FoodList.Count != 0)
+					{
+						foreach (Food food in FoodList)
+						{
+							if (food.x + 100 > x && x < food.x - 100)
+								newplace = false;
+							else
+								newplace = true;
+
+							if (food.y + 100 > y && y < food.y - 100)
+								newplace = false;
+							else
+								newplace = true;
+						}
+					}
+
+					else
+						newplace = true;
+
+                } while (newplace == false);
+
+				int ran = r.Next(10);
+
+				if (ran < 8)
+				{
+					Standard food = new Standard();
+					food.x = x;
+					food.y = y;
+					FoodList.AddFirst(food);
+				}
+
+				else if (ran >= 8 && ran < 9)
+				{
+					Valuable food = new Valuable();
+					food.x = x;
+					food.y = y;
+					FoodList.AddFirst(food);
+				}
+
+				else if (ran == 9)
+				{
+					Diet food = new Diet();
+					food.x = x;
+					food.y = y;
+					FoodList.AddFirst(food);
+				}
+			}
+		}
+		
 		void Tick()
 		{
 			if(Running) { 
@@ -92,6 +157,9 @@ namespace SnakeProjekt
             {
 				food.Tick();
             }
+				
+			if (FoodList.Count < 15)
+				CreatFood();
 			}
         }
 
