@@ -37,7 +37,7 @@ namespace SnakeProjekt
                 {
                     Snake[i] = new Dot(SpawnX, 200 + Dot.SIZE * i);
                 }
-                Pen = new Pen(Color.FromArgb(255, 0, 255, 0), 10);
+                Pen = new Pen(Color.Green, 10);
             }
             else
             {
@@ -45,7 +45,7 @@ namespace SnakeProjekt
                 {
                     Snake[i] = new Dot(SpawnX, 300 + Dot.SIZE * i);
                 }
-                Pen = new Pen(Color.FromArgb(255, 0, 0, 255), 10);
+                Pen = new Pen(Color.Blue, 10);
             }
         }
 
@@ -130,6 +130,7 @@ namespace SnakeProjekt
                 if (Snake[0].X == OtherPlayer.Snake[k].X && Snake[0].Y == OtherPlayer.Snake[k].Y)
                 {
                     Engine.Running = false;
+                    
                 }
             }
         }

@@ -58,7 +58,7 @@ namespace SnakeProjekt
             {
 				args.Graphics.DrawString("Press F to run", drawFont, drawBrush, 305, 10);
 				args.Graphics.DrawString("Controls: WASD and IJKL", drawFont, drawBrush, 265, 30);
-				args.Graphics.DrawString("Press T to toggle number of players", drawFont, drawBrush, 265, 30);
+				args.Graphics.DrawString("Press T to toggle number of players", drawFont, drawBrush, 265, 50);
 				//args.Graphics.DrawString($"W:{Form.Size.Width} H:{Form.Size.Height}", drawFont, drawBrush, 300, 50);
 			
             }
@@ -68,11 +68,11 @@ namespace SnakeProjekt
             {
 				//food.Render(args.Graphics);
             }
-				drawBrush.Color = Color.FromArgb(255, 0, 255, 0);
+				drawBrush.Color = Color.Blue;
 				args.Graphics.DrawString($"{Player1.Score}", drawFont, drawBrush, 5, 5);
 
 				if(Player2  != null) { 
-				drawBrush.Color = Color.FromArgb(255, 0, 0, 255);
+				drawBrush.Color = Color.Green;
 				args.Graphics.DrawString($"{Player2.Score}", drawFont, drawBrush, 759, 5);
 				}
 				drawBrush.Color = Color.White;
@@ -90,17 +90,23 @@ namespace SnakeProjekt
 			Player1.CollidePlayer(Player2);
 			Player2.CollidePlayer(Player1);
 
-				foreach (Food food in FoodList)
+			foreach (Food food in FoodList)
             {
 				food.Tick();
             }
 			}
-            else
-            {
-            //    Player1 = new Player(PlayerColor.Blue, this);
-            //    Player2 = new Player(PlayerColor.Green, this);
+        }
 
-            }
+		private void togglePlayerNumber()
+        {
+			if(Player2  != null)
+                   {
+						Player2 = null;
+                   }
+			else
+                   {
+						Player2 = new Player(PlayerColor.Green, this);
+                   }
         }
 
 		// Handle the KeyDown.
@@ -110,24 +116,16 @@ namespace SnakeProjekt
 			{
 				case Keys.F:
 					if(Running) { 
-					Running = false;
+					Running = false; //Reset method
 						}
                     else { 
-					Running = true;
+					Running = true;  //Reset method
 					}
 					break;
 				case Keys.T:
 					if(!Running)
-                    {
-						if(Player2  != null)
-                        {
-							Player2 = null;
-                        }
-						else
-                        {
-							Player2 = new Player(PlayerColor.Green, this);
-                        }
-
+                    { 
+						togglePlayerNumber();
                     }
 					break;
 
