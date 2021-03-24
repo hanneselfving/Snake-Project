@@ -84,9 +84,7 @@ namespace SnakeProjekt
 		{
 			if(Running) { 
 			Player1.Tick();
-			if(Player2  != null) { 
 			Player2.Tick();
-			}
 			Player1.CollidePlayer(Player2);
 			Player2.CollidePlayer(Player1);
 
@@ -157,6 +155,11 @@ namespace SnakeProjekt
 
 			}
 		}
+
+		public void Reset()
+        {
+			running = false;
+        }
 
 	}
 }

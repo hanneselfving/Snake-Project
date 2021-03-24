@@ -49,14 +49,21 @@ namespace SnakeProjekt
             }
         }
 
-        public void Tick()
+        public void Tick(Player OtherPlayer)
         {
+            for (int k = 0; k < OtherPlayer.Count; k++)
+            {
+                if (Snake[0].X == OtherPlayer.Snake[k].X && Snake[0].Y == OtherPlayer.Snake[k].Y)
+                {
+                    Engine.Reset();
+                }
+            }
             Move(CurDir);
             foreach (Food food in Engine.FoodList)
             {
                 if (Snake[0].X == food.x && Snake[0].Y == food.y)
                 {
-                    switch (1) //NOTE: CHANGE LATER
+                    switch (1) //NOTE: CHANGE LATER§§
                     {
                         case 1:
                             Count++;
@@ -87,7 +94,6 @@ namespace SnakeProjekt
         }
         public void Move(Direction d)
         {
-
             for (int i = Count - 1; i > 0; i--) //Move tail
             {
 
@@ -118,9 +124,8 @@ namespace SnakeProjekt
         {
             if(Snake[0].X < 10 || Snake[0].X > 765 || Snake[0].Y < 10 || Snake[0].Y > 540)
             {
-                Engine.Running = false;
+                Engine.Reset();
             }
-    
         }
 
         public void CollidePlayer(Player OtherPlayer)
@@ -130,7 +135,6 @@ namespace SnakeProjekt
                 if (Snake[0].X == OtherPlayer.Snake[k].X && Snake[0].Y == OtherPlayer.Snake[k].Y)
                 {
                     Engine.Running = false;
-                    
                 }
             }
         }
