@@ -1,5 +1,3 @@
-﻿using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Timers;
@@ -13,7 +11,7 @@ namespace SnakeProjekt
         protected System.Timers.Timer Timer;
 
         abstract public void Tick();
-        abstract public void Render(PaintEventArgs g);
+        abstract public void Render(Graphics g);
 
 
     }
@@ -44,11 +42,10 @@ namespace SnakeProjekt
 
         }
 
-        Pen pen = new Pen(Color.FromArgb(255, 0, 0));
-        public override void Render(PaintEventArgs g)
+        Pen pen = new Pen(Color.FromArgb(255, 100, 100), 10);
+        public override void Render(Graphics g)
         {
-            g.Graphics.DrawEllipse(pen, x, y, size, size);
-            pen.Dispose();
+            g.DrawEllipse(pen, x, y, size, size);
         }
 
     }
@@ -78,10 +75,10 @@ namespace SnakeProjekt
 
         }
 
-        Pen pen = new Pen(Color.FromArgb(0, 255, 0));
-        public override void Render(PaintEventArgs g)
+        Pen pen = new Pen(Color.FromArgb(100, 255, 100), 10);
+        public override void Render(Graphics g)
         {
-            g.Graphics.DrawEllipse(pen, x, y, size, size);
+            g.DrawEllipse(pen, x, y, size, size);
 
         }
     }
@@ -108,13 +105,12 @@ namespace SnakeProjekt
                 Timer.Dispose();
             }
 
-
         }
 
-        Pen pen = new Pen(Color.FromArgb(0, 0, 255));
-        public override void Render(PaintEventArgs g)
+        Pen pen = new Pen(Color.FromArgb(100, 100, 255), 10);
+        public override void Render(Graphics g)
         {
-            g.Graphics.DrawEllipse(pen, x, y, size, size);
+            g.DrawEllipse(pen, x, y, size, size);
 
         }
     }
