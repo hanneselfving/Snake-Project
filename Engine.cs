@@ -20,7 +20,7 @@ namespace SnakeProjekt
 
 		 // Create font and brush.
 		Font drawFont = new Font("Times New Roman", 16);
-		SolidBrush drawBrush = new SolidBrush(Color.Black);
+		SolidBrush drawBrush = new SolidBrush(Color.White);
 
 		public Engine()
         {
@@ -49,15 +49,17 @@ namespace SnakeProjekt
 
 		void Render(Object obj, PaintEventArgs args)
 		{
+			Player1.Render(args.Graphics);
+			Player2.Render(args.Graphics);
+
 			if(!running)
             {
-				args.Graphics.DrawString("Press F to run", drawFont, drawBrush, 325, 10);
-				args.Graphics.DrawString("Controls: WASD and IJKL", drawFont, drawBrush, 290, 30);
+				args.Graphics.DrawString("Press F to run", drawFont, drawBrush, 305, 10);
+				args.Graphics.DrawString("Controls: WASD and IJKL", drawFont, drawBrush, 265, 30);
 				//args.Graphics.DrawString($"W:{Form.Size.Width} H:{Form.Size.Height}", drawFont, drawBrush, 300, 50);
 			
             }
-			Player1.Render(args.Graphics);
-			Player2.Render(args.Graphics);
+			
 			if(Running) { 
 			foreach(Food food in FoodList)
             {
@@ -67,6 +69,7 @@ namespace SnakeProjekt
 				args.Graphics.DrawString($"{Player1.Score}", drawFont, drawBrush, 5, 5);
 				drawBrush.Color = Color.FromArgb(255, 0, 0, 255);
 				args.Graphics.DrawString($"{Player2.Score}", drawFont, drawBrush, 759, 5);
+				drawBrush.Color = Color.White;
 			}
 
 		}

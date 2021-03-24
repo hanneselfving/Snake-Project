@@ -19,6 +19,7 @@ namespace SnakeProjekt
             Width = 800;
             Height = 600;
             DoubleBuffered = true;
+            BackColor = Color.Black;
         }
     }
 }
