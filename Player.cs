@@ -22,7 +22,6 @@ namespace SnakeProjekt
         public Direction curdir { get => CurDir; set => CurDir = value; }
         public int Score { get => score; set => score = value; }
         Pen Pen;
-        private Direction curDir;
         Engine Engine;
 
         public Player(PlayerColor color, Engine engine)
