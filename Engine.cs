@@ -10,7 +10,7 @@ namespace SnakeProjekt
 	{
 		MainForm Form = new MainForm();
 		Timer Timer = new Timer();
-		const int FPS = 30;
+		const int FPS = 10;
 
 		bool running = false;
 		public bool Running { get => running; set => running = value;}
@@ -149,9 +149,8 @@ namespace SnakeProjekt
 		{
 			if(Running) { 
 			Player1.Tick();
-			Player2.Tick();
-			Player1.CollidePlayer(Player2);
-			Player2.CollidePlayer(Player1);
+			if(Player2 != null)
+				Player2.Tick();
 
 			foreach (Food food in FoodList)
             {
@@ -196,29 +195,37 @@ namespace SnakeProjekt
 					break;
 
 				case Keys.A:
-					Player1.curdir = Direction.Left;
+					if(Player1.curdir != Direction.Right)
+						Player1.curdir = Direction.Left;
 					break;
 				case Keys.D:
-					Player1.curdir = Direction.Right;
+					if (Player1.curdir != Direction.Left)
+						Player1.curdir = Direction.Right;
 					break;
 				case Keys.W:
-					Player1.curdir = Direction.Up;
+					if (Player1.curdir != Direction.Down)
+						Player1.curdir = Direction.Up;
 					break;
 				case Keys.S:
-					Player1.curdir = Direction.Down;
+					if (Player1.curdir != Direction.Up)
+						Player1.curdir = Direction.Down;
 					break;
 
 				case Keys.J:
-					Player2.curdir = Direction.Left;
+					if (Player2.curdir != Direction.Right)
+						Player2.curdir = Direction.Left;
 					break;
 				case Keys.L:
-					Player2.curdir = Direction.Right;
+					if (Player2.curdir != Direction.Left)
+						Player2.curdir = Direction.Right;
 					break;
 				case Keys.I:
-					Player2.curdir = Direction.Up;
+					if (Player2.curdir != Direction.Down)
+						Player2.curdir = Direction.Up;
 					break;
 				case Keys.K:
-					Player2.curdir = Direction.Down;
+					if (Player2.curdir != Direction.Up)
+						Player2.curdir = Direction.Down;
 					break;
 
 			}
@@ -227,6 +234,30 @@ namespace SnakeProjekt
 		public void Reset()
         {
 			running = false;
+			Player1 = new Player(PlayerColor.Blue, this);
+			if(Player2 != null)
+				Player2 = new Player(PlayerColor.Green, this);
+        }
+
+		public void CollidePlayer()
+        {
+			if(Player2  != null) {
+				for (int k = 0; k < Player2.Count; k++)
+				{
+					if (Player1.Snake[0].DotRect.IntersectsWith(Player2.Snake[k].DotRect))
+					{
+						Reset();
+					}
+				}
+
+				for (int k = 0; k < Player2.Count; k++)
+				{
+					if (Player2.Snake[0].DotRect.IntersectsWith(Player1.Snake[k].DotRect))
+					{
+						Reset();
+					}
+				}
+			}
         }
 
 	}

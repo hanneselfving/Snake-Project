@@ -14,14 +14,14 @@ namespace SnakeProjekt
     public class Player
     {
 
-        Dot[] Snake;
+        public Dot[] Snake{ get; set; }
         public int Count { get; set; }
-        int Speed = 10;
+        int Speed = 25;
         int score = 0;
         private Direction CurDir = Direction.Up;
         public Direction curdir { get => CurDir; set => CurDir = value; }
         public int Score { get => score; set => score = value; }
-        Pen Pen;
+        SolidBrush PlayerBrush;
         Engine Engine;
 
         public Player(PlayerColor color, Engine engine)
@@ -37,7 +37,7 @@ namespace SnakeProjekt
                 {
                     Snake[i] = new Dot(SpawnX, 200 + Dot.SIZE * i);
                 }
-                Pen = new Pen(Color.Green, 10);
+                PlayerBrush = new SolidBrush(Color.Green);
             }
             else
             {
@@ -45,19 +45,13 @@ namespace SnakeProjekt
                 {
                     Snake[i] = new Dot(SpawnX, 300 + Dot.SIZE * i);
                 }
-                Pen = new Pen(Color.Blue, 10);
+                PlayerBrush = new SolidBrush(Color.Blue);
             }
         }
 
-        public void Tick(Player OtherPlayer)
+        public void Tick()
         {
-            for (int k = 0; k < OtherPlayer.Count; k++)
-            {
-                if (Snake[0].X == OtherPlayer.Snake[k].X && Snake[0].Y == OtherPlayer.Snake[k].Y)
-                {
-                    Engine.Reset();
-                }
-            }
+
             Move(CurDir);
             foreach (Food food in Engine.FoodList)
             {
@@ -83,13 +77,14 @@ namespace SnakeProjekt
                 }
             }
             CollideWall();
+            Engine.CollidePlayer();
         }
 
         public void Render(Graphics g)
         {
             for (int i = 0; i < Count; i++)
             {
-                g.DrawRectangle(Pen, Snake[i].X, Snake[i].Y, Dot.SIZE, Dot.SIZE);
+                g.FillRectangle(PlayerBrush, Snake[i].X, Snake[i].Y, Dot.SIZE, Dot.SIZE);
             }
         }
         public void Move(Direction d)
@@ -122,26 +117,12 @@ namespace SnakeProjekt
 
         public void CollideWall()
         {
-            if(Snake[0].X < 10 || Snake[0].X > 765 || Snake[0].Y < 10 || Snake[0].Y > 540)
+            if(Snake[0].X < 0 || Snake[0].X > 770 || Snake[0].Y < 0 || Snake[0].Y > 545)
             {
                 Engine.Reset();
             }
         }
 
-        public void CollidePlayer(Player OtherPlayer)
-        {
-            for(int k=0; k < OtherPlayer.Count; k++)
-            {
-                if (Snake[0].X == OtherPlayer.Snake[k].X && Snake[0].Y == OtherPlayer.Snake[k].Y)
-                {
-                    Engine.Running = false;
-                }
-            }
-        }
     }
-
-
-
-
 
 }
