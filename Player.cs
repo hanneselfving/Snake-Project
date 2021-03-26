@@ -119,7 +119,7 @@ namespace SnakeProjekt
         {
             if(Snake[0].X < 0 || Snake[0].X > 770 || Snake[0].Y < 0 || Snake[0].Y > 545)
             {
-                Engine.Reset();
+                Engine.DoGameOver();
             }
         }
 

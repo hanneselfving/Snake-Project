@@ -25,3 +25,12 @@ C:\Users\malin\Source\Repos\hanneselfving\Snake-Project\obj\Debug\SnakeProjekt.p
 C:\Users\malin\source\repos\hanneselfving\Snake-Project\bin\Debug\SnakeProjekt.exe.config
 C:\Users\malin\source\repos\hanneselfving\Snake-Project\bin\Debug\SnakeProjekt.exe
 C:\Users\malin\source\repos\hanneselfving\Snake-Project\bin\Debug\SnakeProjekt.pdb
+C:\Users\Hannes\Source\Repos\Snake-ProjectNy\bin\Debug\SnakeProjekt.exe.config
+C:\Users\Hannes\Source\Repos\Snake-ProjectNy\bin\Debug\SnakeProjekt.exe
+C:\Users\Hannes\Source\Repos\Snake-ProjectNy\bin\Debug\SnakeProjekt.pdb
+C:\Users\Hannes\Source\Repos\Snake-ProjectNy\obj\Debug\SnakeProjekt.csprojAssemblyReference.cache
+C:\Users\Hannes\Source\Repos\Snake-ProjectNy\obj\Debug\SnakeProjekt.Properties.Resources.resources
+C:\Users\Hannes\Source\Repos\Snake-ProjectNy\obj\Debug\SnakeProjekt.csproj.GenerateResource.cache
+C:\Users\Hannes\Source\Repos\Snake-ProjectNy\obj\Debug\SnakeProjekt.csproj.CoreCompileInputs.cache
+C:\Users\Hannes\Source\Repos\Snake-ProjectNy\obj\Debug\SnakeProjekt.exe
+C:\Users\Hannes\Source\Repos\Snake-ProjectNy\obj\Debug\SnakeProjekt.pdb

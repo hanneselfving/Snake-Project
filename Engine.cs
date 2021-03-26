@@ -13,7 +13,9 @@ namespace SnakeProjekt
 		const int FPS = 10;
 
 		bool running = false;
+		bool gameOver = false;
 		public bool Running { get => running; set => running = value;}
+		public bool GameOver { get => gameOver; set => gameOver = value;}
 
 		public static Player Player1, Player2;
 		public static LinkedList<Food> FoodList = new LinkedList<Food>();
@@ -57,11 +59,30 @@ namespace SnakeProjekt
 
 			if(!running)
             {
+				if(GameOver) 
+				{ 
+					if(Player1.Score == Player2.Score)
+                    {
+						args.Graphics.DrawString("Tie!", drawFont, drawBrush, 320, 10);
+                    }
+					else if(Player1.Score > Player2.Score)
+                    {
+						args.Graphics.DrawString("Blue Player is Victorious!", drawFont, drawBrush, 300, 10);
+                    }
+					if(Player1.Score < Player2.Score)
+                    {
+						args.Graphics.DrawString("Green Player is Victorious!", drawFont, drawBrush, 300, 10);
+                    }
+					args.Graphics.DrawString("Press F to continue", drawFont, drawBrush, 305, 30);
+				}
+				else 
+				{ 
 				args.Graphics.DrawString("Press F to run", drawFont, drawBrush, 305, 10);
 				args.Graphics.DrawString("Controls: WASD and IJKL", drawFont, drawBrush, 265, 30);
 				args.Graphics.DrawString("Press T to toggle number of players", drawFont, drawBrush, 265, 50);
 				//args.Graphics.DrawString($"W:{Form.Size.Width} H:{Form.Size.Height}", drawFont, drawBrush, 300, 50);
-			
+				}
+
             }
 			
 			if(Running) { 
@@ -180,15 +201,17 @@ namespace SnakeProjekt
 			switch (e.KeyCode)
 			{
 				case Keys.F:
-					if(Running) { 
-					Running = false; //Reset method
-						}
-                    else { 
-					Running = true;  //Reset method
+					if(GameOver || Running)
+                    {
+						Reset();
+                    }
+                    else 
+					{ 
+					Running = true; //Replace with StartRunning-Method (perhaps) 
 					}
 					break;
 				case Keys.T:
-					if(!Running)
+					if(!Running && !GameOver)
                     { 
 						togglePlayerNumber();
                     }
@@ -231,9 +254,17 @@ namespace SnakeProjekt
 			}
 		}
 
+		public void DoGameOver()
+        {
+			Running = false;
+			GameOver = true;
+
+        }
+
 		public void Reset()
         {
-			running = false;
+			Running = false;
+			GameOver = false;
 			Player1 = new Player(PlayerColor.Blue, this);
 			if(Player2 != null)
 				Player2 = new Player(PlayerColor.Green, this);
@@ -246,7 +277,7 @@ namespace SnakeProjekt
 				{
 					if (Player1.Snake[0].DotRect.IntersectsWith(Player2.Snake[k].DotRect))
 					{
-						Reset();
+						DoGameOver();
 					}
 				}
 
@@ -254,7 +285,7 @@ namespace SnakeProjekt
 				{
 					if (Player2.Snake[0].DotRect.IntersectsWith(Player1.Snake[k].DotRect))
 					{
-						Reset();
+						DoGameOver();
 					}
 				}
 			}
