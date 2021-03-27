@@ -102,65 +102,80 @@ namespace SnakeProjekt
 
 		}
 		
-		void CreatFood()
+void CreatFood()
 		{
-			Random r = new Random();
-
 			for (int i = FoodList.Count; i < 15; i++)
 			{
+
+				Random r = new Random();
+
+
+				int maxWidth = Form.Width % 25;
+				int maxHeight = Form.Height % 25;
+				maxWidth = Form.Width - maxWidth;
+				maxHeight = Form.Height - maxHeight;
+
+				float x;
+				float y;
 				bool newplace = false;
 
-				int x;
-				int y;
-				do
+				if (FoodList.Count != 0)
 				{
-					x = r.Next(Form.Width-50);
-					y = r.Next(Form.Height-75);
-
-					if (FoodList.Count != 0)
+					do
 					{
+						y = r.Next((maxHeight / 25) + 1) * 25;
+						x = r.Next((maxWidth / 25) + 1) * 25;
+
 						foreach (Food food in FoodList)
 						{
-							if (food.x + 100 > x && x < food.x - 100)
+							if (food.x == x && food.y == y)
+							{
 								newplace = false;
-							else
-								newplace = true;
+								break;
+							}
 
-							if (food.y + 100 > y && y < food.y - 100)
-								newplace = false;
 							else
 								newplace = true;
 						}
-					}
 
-					else
-						newplace = true;
+					} while (newplace == false);
+				}
 
-                } while (newplace == false);
+                else
+                {
+					y = r.Next((maxHeight / 25) + 1) * 25;
+					x = r.Next((maxWidth / 25) + 1) * 25;
+				}
 
-				int ran = r.Next(10);
+				int type = r.Next(10);
 
-				if (ran < 8)
+				if (type < 8)
 				{
 					Standard food = new Standard();
 					food.x = x;
 					food.y = y;
+					food.point = 1;
+					food.lengthAdd = 1;
 					FoodList.AddFirst(food);
 				}
 
-				else if (ran >= 8 && ran < 9)
+				else if (type >= 8 && type < 9)
 				{
 					Valuable food = new Valuable();
 					food.x = x;
 					food.y = y;
+					food.point = 5;
+					food.lengthAdd = 2;
 					FoodList.AddFirst(food);
 				}
 
-				else if (ran == 9)
+				else if (type == 9)
 				{
 					Diet food = new Diet();
 					food.x = x;
 					food.y = y;
+					food.point = 1;
+					food.lengthAdd = -1;
 					FoodList.AddFirst(food);
 				}
 			}
