@@ -10,7 +10,7 @@ namespace SnakeProjekt
 	{
 		MainForm Form = new MainForm();
 		Timer Timer = new Timer();
-		const int FPS = 3;
+		const int FPS = 10;
 
 		bool running = false;
 		bool gameOver = false;
