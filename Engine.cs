@@ -275,23 +275,24 @@ namespace SnakeProjekt
 			bool HasCollided1 = false;
 			bool HasCollided2 = false;
 
-			for (int k = 1; k < Player1.Count; k++)
-			{
-				if (Player1.Snake[0].DotRect.IntersectsWith(Player1.Snake[k].DotRect))
+			if (Player2 != null)
 				{
-					Player1.Count = 0;
+					for (int k = 1; k < Player1.Count; k++)
+				{
+					if (Player1.Snake[0].DotRect.IntersectsWith(Player1.Snake[k].DotRect))
+					{
+						Player1.Count = 0;
+					}
 				}
-			}
 
-			for (int k = 1; k < Player2.Count; k++)
-			{
-				if (Player2.Snake[0].DotRect.IntersectsWith(Player2.Snake[k].DotRect))
+				for (int k = 1; k < Player2.Count; k++)
 				{
-					Player2.Count = 0;
+					if (Player2.Snake[0].DotRect.IntersectsWith(Player2.Snake[k].DotRect))
+					{
+						Player2.Count = 0;
+					}
 				}
-			}
-			if (Player1 != null && Player2 != null)
-			{
+
 				for (int k = 0; k < Player2.Count; k++)
 				{
 					if (Player1.Snake[0].DotRect.IntersectsWith(Player2.Snake[k].DotRect))
@@ -335,9 +336,15 @@ namespace SnakeProjekt
 				if (Player1.Snake[0].X < 0 || Player1.Snake[0].X > 770 || Player1.Snake[0].Y < 0 || Player1.Snake[0].Y > 545)
 				{
 					Player1.Count = 0;
-					//Player1 = null;
-					if (Player2.Count == 0)
+					if(Player2 == null)
+                    {
 						DoGameOver();
+                    }
+					if (Player2 != null)
+					{
+						if (Player2.Count == 0)
+							DoGameOver();
+					}
 				}
 			}
 
@@ -346,9 +353,15 @@ namespace SnakeProjekt
 				if (Player2.Snake[0].X < 0 || Player2.Snake[0].X > 770 || Player2.Snake[0].Y < 0 || Player2.Snake[0].Y > 545)
 				{
 					Player2.Count = 0;
-					//Player2 = null;
-					if (Player1.Count == 0)
+					if (Player2 == null)
+					{
 						DoGameOver();
+					}
+					if (Player1 != null)
+					{
+						if (Player1.Count == 0)
+							DoGameOver();
+					}
 				}
 			}
 		}
