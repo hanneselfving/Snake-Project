@@ -6,7 +6,7 @@ namespace SnakeProjekt
 {
     abstract public class Food
     {
-        public float x, y, 
+        public float x, y;
         public int size = 5;
         public bool Expired = false;
         protected System.Timers.Timer Timer;
