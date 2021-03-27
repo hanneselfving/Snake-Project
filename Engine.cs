@@ -10,7 +10,7 @@ namespace SnakeProjekt
 	{
 		MainForm Form = new MainForm();
 		Timer Timer = new Timer();
-		const int FPS = 10;
+		const int FPS = 3;
 
 		bool running = false;
 		bool gameOver = false;
@@ -333,7 +333,7 @@ namespace SnakeProjekt
 		{
 			if (Player1 != null)
 			{
-				if (Player1.Snake[0].X < 0 || Player1.Snake[0].X > 770 || Player1.Snake[0].Y < 0 || Player1.Snake[0].Y > 545)
+				if (Player1.Snake[0].X < 0 || Player1.Snake[0].X > 765 || Player1.Snake[0].Y < 0 || Player1.Snake[0].Y > 565)
 				{
 					Player1.Count = 0;
 					if(Player2 == null)
@@ -350,7 +350,7 @@ namespace SnakeProjekt
 
 			if(Player2 != null)
 			{
-				if (Player2.Snake[0].X < 0 || Player2.Snake[0].X > 770 || Player2.Snake[0].Y < 0 || Player2.Snake[0].Y > 545)
+				if (Player2.Snake[0].X < 0 || Player2.Snake[0].X > 790|| Player2.Snake[0].Y < 0 || Player2.Snake[0].Y > 590)
 				{
 					Player2.Count = 0;
 					if (Player2 == null)
