@@ -29,7 +29,7 @@ namespace SnakeProjekt
             Snake = new Dot[999];
             Engine = engine;
             Count = 3;
-            int SpawnX = 380;
+            int SpawnX = 375;
       
             if (color == PlayerColor.Green)
             {
@@ -76,7 +76,7 @@ namespace SnakeProjekt
 
                 }
             }
-            CollideWall();
+            Engine.CollideWall();
             Engine.CollidePlayer();
         }
 
@@ -115,13 +115,6 @@ namespace SnakeProjekt
 
         }
 
-        public void CollideWall()
-        {
-            if(Snake[0].X < 0 || Snake[0].X > 770 || Snake[0].Y < 0 || Snake[0].Y > 545)
-            {
-                Engine.DoGameOver();
-            }
-        }
 
     }
 
