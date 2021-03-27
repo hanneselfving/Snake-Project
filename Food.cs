@@ -6,7 +6,8 @@ namespace SnakeProjekt
 {
     abstract public class Food
     {
-        public int x, y, size = 5;
+        public float x, y, 
+        public int size = 5;
         public bool Expired = false;
         protected System.Timers.Timer Timer;
 
@@ -45,7 +46,7 @@ namespace SnakeProjekt
         Pen pen = new Pen(Color.FromArgb(255, 100, 100), 10);
         public override void Render(Graphics g)
         {
-            g.DrawEllipse(pen, x, y, size, size);
+            g.DrawEllipse(pen, x + (float)25 / 2, y + (float)25 / 2, size, size);
         }
 
     }
@@ -78,7 +79,7 @@ namespace SnakeProjekt
         Pen pen = new Pen(Color.FromArgb(100, 255, 100), 10);
         public override void Render(Graphics g)
         {
-            g.DrawEllipse(pen, x, y, size, size);
+            g.DrawEllipse(pen, x + (float)25 / 2, y + (float)25 / 2, size, size);
 
         }
     }
@@ -110,7 +111,7 @@ namespace SnakeProjekt
         Pen pen = new Pen(Color.FromArgb(100, 100, 255), 10);
         public override void Render(Graphics g)
         {
-            g.DrawEllipse(pen, x, y, size, size);
+            g.DrawEllipse(pen, x + (float)25 / 2, y + (float)25 / 2, size, size);
 
         }
     }
