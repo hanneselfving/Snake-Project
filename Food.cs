@@ -26,8 +26,8 @@ namespace SnakeProjekt
 
         public Food(int x, int y)
         {
-            this.X = x;
-            this.Y = y;
+            X = x;
+            Y = y;
         }
 
         abstract public void Tick();
@@ -35,7 +35,6 @@ namespace SnakeProjekt
         {
             g.FillEllipse(Brush, X + Dot.SIZE/2 - SIZE/2, Y + Dot.SIZE/2 - SIZE/2, SIZE, SIZE);
            // g.FillRectangle(Brush, X, Y, Dot.SIZE, Dot.SIZE);
-            
         }
 
 
@@ -47,8 +46,8 @@ namespace SnakeProjekt
         
         public Standard(int x, int y) : base(x,y)
         {
-            this.Brush = new SolidBrush(Color.FromArgb(255,100,100));
-            this.Type = FoodType.standard;
+            Brush = new SolidBrush(Color.FromArgb(255,100,100));
+            Type = FoodType.standard;
         }
 
         public override void Tick()
@@ -62,8 +61,8 @@ namespace SnakeProjekt
 
         public Valuable(int x, int y) : base(x, y)
         {
-            this.Brush = new SolidBrush(Color.FromArgb(100, 255, 100));
-            this.Type = FoodType.valuable;
+            Brush = new SolidBrush(Color.FromArgb(100, 255, 100));
+            Type = FoodType.valuable;
         }
 
         public override void Tick()
@@ -76,8 +75,8 @@ namespace SnakeProjekt
     {
         public Diet(int x, int y) : base(x, y)
         {
-            this.Brush = new SolidBrush(Color.FromArgb(100, 100, 255));
-            this.Type = FoodType.diet;
+            Brush = new SolidBrush(Color.FromArgb(100, 100, 255));
+            Type = FoodType.diet;
         }
 
         public override void Tick()

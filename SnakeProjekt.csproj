@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Coordinates.cs" />
     <Compile Include="Dot.cs" />
     <Compile Include="Engine.cs" />
     <Compile Include="Food.cs" />

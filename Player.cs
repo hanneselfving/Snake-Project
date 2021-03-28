@@ -46,7 +46,6 @@ namespace SnakeProjekt
 
         public void Tick()
         {
-
             Move(Curdir);
             Food food = Engine.food;
 

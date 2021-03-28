@@ -118,16 +118,19 @@ namespace SnakeProjekt
 			Random rand = new Random();
 			int x = 0, y = 0;
 			SetFoodPosition(ref x, ref y);
-			switch (rand.Next(0, 3))
+			switch (rand.Next(0, 4))
 			{
-				case (int)FoodType.standard:
-					food = new Standard(x, y);
-					break;
+				//case (int)FoodType.standard:
+				//	food = new Standard(x, y);
+				//	break;
 				case (int)FoodType.valuable:
 					food = new Valuable(x, y);
 					break;
 				case (int)FoodType.diet:
 					food = new Diet(x, y);
+					break;
+				default:
+					food = new Standard(x, y);
 					break;
 
 			}
@@ -137,15 +140,60 @@ namespace SnakeProjekt
 
 		void SetFoodPosition(ref int x, ref int y)
 		{
-			Random rand = new Random();
+			Coordinates coordinates = new Coordinates();
+			coordinates = FreePositions();
 
-			do
-			{
-				x = rand.Next(0, WIDTH / Dot.SIZE) * Dot.SIZE;
-				y = rand.Next(0, HEIGHT / Dot.SIZE) * Dot.SIZE;
-
-			} while (x > 70 && y > 17 && x < 701);
+			x = coordinates.X;
+			y = coordinates.Y;
 		}
+
+		Coordinates FreePositions()
+        {
+			List<Coordinates> freeCoordinates = new List<Coordinates>();
+
+
+			for (int i = 0; i <= WIDTH; i = i + Dot.SIZE)
+			{
+				for (int j = 0; j <= HEIGHT; j = j + Dot.SIZE)
+				{			
+					Coordinates coordinates = new Coordinates();
+					coordinates.X = i;
+					coordinates.Y = j;
+
+					freeCoordinates.Add(coordinates);
+				}
+			}
+
+			for(int i = 0; i<Player1.Count;i++)
+            {
+				for(int j = 0; j<freeCoordinates.Count; j++)
+                {
+					if(Player1.Snake[i].X==freeCoordinates[j].X&& Player1.Snake[i].Y == freeCoordinates[j].Y)
+                    {
+						freeCoordinates.RemoveAt(j);
+                    }
+                }
+            }
+
+			if(Player2!=null)
+            {
+				for (int i = 0; i < Player2.Count; i++)
+				{
+					for (int j = 0; j < freeCoordinates.Count; j++)
+					{
+						if (Player2.Snake[i].X == freeCoordinates[j].X && Player2.Snake[i].Y == freeCoordinates[j].Y)
+						{
+							freeCoordinates.RemoveAt(j);
+						}
+					}
+				}
+			}
+
+			Random r = new Random();
+
+			int index = r.Next(freeCoordinates.Count);
+			return freeCoordinates[index];
+        }
 
 		void Tick()
 		{
@@ -157,7 +205,6 @@ namespace SnakeProjekt
 
 				if (food != null)
 					food.Tick();
-
 
 			}
 		}
@@ -213,36 +260,36 @@ namespace SnakeProjekt
 						Player1.Curdir = Direction.Down;
 					break;
 
-			
-					case Keys.J:
-						if(Player2 != null)
-						{ 
-							if (Player2.Curdir != Direction.Right)
-								Player2.Curdir = Direction.Left;
-						}
-						break;
-					case Keys.L:
-						if(Player2 != null)
-						{ 
+
+				case Keys.J:
+					if (Player2 != null)
+					{
+						if (Player2.Curdir != Direction.Right)
+							Player2.Curdir = Direction.Left;
+					}
+					break;
+				case Keys.L:
+					if (Player2 != null)
+					{
 						if (Player2.Curdir != Direction.Left)
 							Player2.Curdir = Direction.Right;
-						}
-						break;
-					case Keys.I:
-						if(Player2 != null)
-						{ 
-							if (Player2.Curdir != Direction.Down)
-								Player2.Curdir = Direction.Up;
-						}
-						break;
-					case Keys.K:
-						if(Player2 != null)
-						{ 
-							if (Player2.Curdir != Direction.Up)
-								Player2.Curdir = Direction.Down;
-						}
-						break;
-				
+					}
+					break;
+				case Keys.I:
+					if (Player2 != null)
+					{
+						if (Player2.Curdir != Direction.Down)
+							Player2.Curdir = Direction.Up;
+					}
+					break;
+				case Keys.K:
+					if (Player2 != null)
+					{
+						if (Player2.Curdir != Direction.Up)
+							Player2.Curdir = Direction.Down;
+					}
+					break;
+
 			}
 		}
 
@@ -362,7 +409,5 @@ namespace SnakeProjekt
 				}
 			}
 		}
-
 	}
-
 }
