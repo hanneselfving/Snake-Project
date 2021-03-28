@@ -70,8 +70,7 @@ namespace SnakeProjekt
                 }
                 else if (food.Type == FoodType.diet)
                 {
-
-                    Snake[Count] = new Dot(Snake[Count - 1].X, Snake[Count - 1].Y);
+                
                     if (Count > 3)
                     {
                         Count--;
