@@ -213,23 +213,36 @@ namespace SnakeProjekt
 						Player1.Curdir = Direction.Down;
 					break;
 
-				case Keys.J:
-					if (Player2.Curdir != Direction.Right)
-						Player2.Curdir = Direction.Left;
-					break;
-				case Keys.L:
-					if (Player2.Curdir != Direction.Left)
-						Player2.Curdir = Direction.Right;
-					break;
-				case Keys.I:
-					if (Player2.Curdir != Direction.Down)
-						Player2.Curdir = Direction.Up;
-					break;
-				case Keys.K:
-					if (Player2.Curdir != Direction.Up)
-						Player2.Curdir = Direction.Down;
-					break;
-
+			
+					case Keys.J:
+						if(Player2 != null)
+						{ 
+							if (Player2.Curdir != Direction.Right)
+								Player2.Curdir = Direction.Left;
+						}
+						break;
+					case Keys.L:
+						if(Player2 != null)
+						{ 
+						if (Player2.Curdir != Direction.Left)
+							Player2.Curdir = Direction.Right;
+						}
+						break;
+					case Keys.I:
+						if(Player2 != null)
+						{ 
+							if (Player2.Curdir != Direction.Down)
+								Player2.Curdir = Direction.Up;
+						}
+						break;
+					case Keys.K:
+						if(Player2 != null)
+						{ 
+							if (Player2.Curdir != Direction.Up)
+								Player2.Curdir = Direction.Down;
+						}
+						break;
+				
 			}
 		}
 
