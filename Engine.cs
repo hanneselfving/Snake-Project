@@ -9,10 +9,11 @@ namespace SnakeProjekt
 	public class Engine
 	{
 		private MainForm Form = new MainForm();
+		
 		private Timer Timer = new Timer();
 		private const int FPS = 10;
-		public static int WIDTH = 800;
-		public static int HEIGHT = 600;
+		public static int WIDTH = 760;
+		public static int HEIGHT = 540;
 
 		private bool running = false;
 		private bool gameOver = false;
@@ -41,9 +42,12 @@ namespace SnakeProjekt
 			Form.KeyDown += OnKeyDown;
 			Timer.Interval = 1000 / FPS;
 			Timer.Start();
-			
-			Application.Run(Form);
 
+			Form.MaximizeBox = false;
+			Form.MinimizeBox = false;
+			Form.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+
+			Application.Run(Form);
 		}
 
 		void TimerEventHandler(Object obj, EventArgs args)
@@ -102,18 +106,14 @@ namespace SnakeProjekt
 				args.Graphics.DrawString("Press T to toggle number of players", drawFont, drawBrush, 265, 50);
 				//args.Graphics.DrawString($"W:{Form.Size.Width} H:{Form.Size.Height}", drawFont, drawBrush, 300, 50);
 				}
-
             }
-			
-		
-
 		}
 		
 		public void SpawnFood()
 		{
 			food = null;
 			Random rand = new Random();
-			 int x = 0, y = 0;
+			int x = 0, y = 0;
 			SetFoodPosition(ref x, ref y);
 			switch (rand.Next(0, 3))
 			{
@@ -130,16 +130,18 @@ namespace SnakeProjekt
 			}
 				Console.WriteLine(food.X);
 				Console.WriteLine(food.Y);
-	
 		}
 
 		void SetFoodPosition(ref int x, ref int y)
         {
 			Random rand = new Random();
 
-			x = rand.Next(0,WIDTH/Dot.SIZE) * Dot.SIZE;
-			y = rand.Next(0, HEIGHT/Dot.SIZE) * Dot.SIZE;
+			do
+			{
+				x = rand.Next(0, WIDTH / Dot.SIZE) * Dot.SIZE;
+				y = rand.Next(0, HEIGHT / Dot.SIZE) * Dot.SIZE;
 
+			} while (x > 70 && y > 17 && x < 701);
 		}
 		
 		void Tick()

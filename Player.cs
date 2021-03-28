@@ -49,6 +49,7 @@ namespace SnakeProjekt
 
             Move(Curdir);
             Food food = Engine.food;
+
                 if (Snake[0].X == food.X && Snake[0].Y == food.Y)
                 {
                     if(food.Type == FoodType.standard)
