@@ -300,12 +300,14 @@ namespace SnakeProjekt
 					Player1.Count = 0;
 				}
 			}
-
-			for (int k = 1; k < Player2.Count; k++)
+			if (Player2 != null)
 			{
-				if (Player2.Snake[0].DotRect.IntersectsWith(Player2.Snake[k].DotRect))
+				for (int k = 1; k < Player2.Count; k++)
 				{
-					Player2.Count = 0;
+					if (Player2.Snake[0].DotRect.IntersectsWith(Player2.Snake[k].DotRect))
+					{
+						Player2.Count = 0;
+					}
 				}
 			}
 
