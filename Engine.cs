@@ -8,26 +8,29 @@ namespace SnakeProjekt
 {
 	public class Engine
 	{
-		MainForm Form = new MainForm();
-		Timer Timer = new Timer();
-		const int FPS = 10;
+		private MainForm Form = new MainForm();
+		private Timer Timer = new Timer();
+		private const int FPS = 10;
+		public static int WIDTH = 800;
+		public static int HEIGHT = 600;
 
-		bool running = false;
-		bool gameOver = false;
-		public bool Running { get => running; set => running = value;}
-		public bool GameOver { get => gameOver; set => gameOver = value;}
+		private bool running = false;
+		private bool gameOver = false;
+
+		private Font drawFont = new Font("Times New Roman", 16);
+		private SolidBrush drawBrush = new SolidBrush(Color.White);
 
 		public static Player Player1, Player2;
-		public static LinkedList<Food> FoodList = new LinkedList<Food>();
+		public static Food food = null;
 
-		 // Create font and brush.
-		Font drawFont = new Font("Times New Roman", 16);
-		SolidBrush drawBrush = new SolidBrush(Color.White);
+		public bool Running { get => running; set => running = value; }
+		public bool GameOver { get => gameOver; set => gameOver = value; }
 
 		public Engine()
         {
 			Player1 = new Player(PlayerColor.Blue, this);
 			Player2 = new Player(PlayerColor.Green, this);
+			SpawnFood();
         }
 
 
@@ -38,7 +41,6 @@ namespace SnakeProjekt
 			Form.KeyDown += OnKeyDown;
 			Timer.Interval = 1000 / FPS;
 			Timer.Start();
-			CreatFood();
 			
 			Application.Run(Form);
 
@@ -52,14 +54,32 @@ namespace SnakeProjekt
 
 		void Render(Object obj, PaintEventArgs args)
 		{
+
+				if(Running) { 
+			
+				if(food != null)
+				food.Render(args.Graphics);
+            
+				drawBrush.Color = Color.Blue;
+				args.Graphics.DrawString($"{Player1.Score}", drawFont, drawBrush, 5, 5);
+
+				if(Player2  != null) { 
+				drawBrush.Color = Color.Green;
+				args.Graphics.DrawString($"{Player2.Score}", drawFont, drawBrush, 759, 5);
+				}
+				drawBrush.Color = Color.White;
+			}
+
 			Player1.Render(args.Graphics);
 			if(Player2 != null) {
 				Player2.Render(args.Graphics);
 			}
 
+
+
 			if(!running)
             {
-				if(GameOver) 
+				if(GameOver && Player2 != null) 
 				{ 
 					if(Player1.Score == Player2.Score)
                     {
@@ -85,120 +105,59 @@ namespace SnakeProjekt
 
             }
 			
-			if(Running) { 
-			foreach(Food food in FoodList)
-            {
-				food.Render(args.Graphics);
-            }
-				drawBrush.Color = Color.Blue;
-				args.Graphics.DrawString($"{Player1.Score}", drawFont, drawBrush, 5, 5);
-
-				if(Player2  != null) { 
-				drawBrush.Color = Color.Green;
-				args.Graphics.DrawString($"{Player2.Score}", drawFont, drawBrush, 759, 5);
-				}
-				drawBrush.Color = Color.White;
-			}
+		
 
 		}
 		
-void CreatFood()
+		public void SpawnFood()
 		{
-			for (int i = FoodList.Count; i < 15; i++)
+			food = null;
+			Random rand = new Random();
+			 int x = 0, y = 0;
+			SetFoodPosition(ref x, ref y);
+			switch (rand.Next(0, 3))
 			{
+				case (int)FoodType.standard:
+					food = new Standard(x, y);
+					break;
+				case (int)FoodType.valuable:
+					food = new Valuable(x, y);
+					break;
+				case (int)FoodType.diet:
+					food = new Diet(x, y);
+					break;
 
-				Random r = new Random();
-
-
-				int maxWidth = Form.Width % 25;
-				int maxHeight = Form.Height % 25;
-				maxWidth = Form.Width - maxWidth;
-				maxHeight = Form.Height - maxHeight;
-
-				float x;
-				float y;
-				bool newplace = false;
-
-				if (FoodList.Count != 0)
-				{
-					do
-					{
-						y = r.Next((maxHeight / 25) + 1) * 25;
-						x = r.Next((maxWidth / 25) + 1) * 25;
-
-						foreach (Food food in FoodList)
-						{
-							if (food.x == x && food.y == y)
-							{
-								newplace = false;
-								break;
-							}
-
-							else
-								newplace = true;
-						}
-
-					} while (newplace == false);
-				}
-
-                else
-                {
-					y = r.Next((maxHeight / 25) + 1) * 25;
-					x = r.Next((maxWidth / 25) + 1) * 25;
-				}
-
-				int type = r.Next(10);
-
-				if (type < 8)
-				{
-					Standard food = new Standard();
-					food.x = x;
-					food.y = y;
-					food.point = 1;
-					food.lengthAdd = 1;
-					FoodList.AddFirst(food);
-				}
-
-				else if (type >= 8 && type < 9)
-				{
-					Valuable food = new Valuable();
-					food.x = x;
-					food.y = y;
-					food.point = 5;
-					food.lengthAdd = 2;
-					FoodList.AddFirst(food);
-				}
-
-				else if (type == 9)
-				{
-					Diet food = new Diet();
-					food.x = x;
-					food.y = y;
-					food.point = 1;
-					food.lengthAdd = -1;
-					FoodList.AddFirst(food);
-				}
 			}
+				Console.WriteLine(food.X);
+				Console.WriteLine(food.Y);
+	
+		}
+
+		void SetFoodPosition(ref int x, ref int y)
+        {
+			Random rand = new Random();
+
+			x = rand.Next(0,WIDTH/Dot.SIZE) * Dot.SIZE;
+			y = rand.Next(0, HEIGHT/Dot.SIZE) * Dot.SIZE;
+
 		}
 		
 		void Tick()
 		{
-			if(Running) { 
-			Player1.Tick();
-			if(Player2 != null)
-				Player2.Tick();
+			if(Running) 
+			{ 
+				Player1.Tick();
+				if(Player2 != null)
+					Player2.Tick();
 
-			foreach (Food food in FoodList)
-            {
-				food.Tick();
-            }
+					if(food != null)
+					food.Tick();
+
 				
-			if (FoodList.Count < 15)
-				CreatFood();
 			}
         }
 
-		private void togglePlayerNumber()
+		private void TogglePlayerNumber()
         {
 			if(Player2  != null)
                    {
@@ -228,42 +187,42 @@ void CreatFood()
 				case Keys.T:
 					if(!Running && !GameOver)
                     { 
-						togglePlayerNumber();
+						TogglePlayerNumber();
                     }
 					break;
 
 				case Keys.A:
-					if(Player1.curdir != Direction.Right)
-						Player1.curdir = Direction.Left;
+					if(Player1.Curdir != Direction.Right)
+						Player1.Curdir = Direction.Left;
 					break;
 				case Keys.D:
-					if (Player1.curdir != Direction.Left)
-						Player1.curdir = Direction.Right;
+					if (Player1.Curdir != Direction.Left)
+						Player1.Curdir = Direction.Right;
 					break;
 				case Keys.W:
-					if (Player1.curdir != Direction.Down)
-						Player1.curdir = Direction.Up;
+					if (Player1.Curdir != Direction.Down)
+						Player1.Curdir = Direction.Up;
 					break;
 				case Keys.S:
-					if (Player1.curdir != Direction.Up)
-						Player1.curdir = Direction.Down;
+					if (Player1.Curdir != Direction.Up)
+						Player1.Curdir = Direction.Down;
 					break;
 
 				case Keys.J:
-					if (Player2.curdir != Direction.Right)
-						Player2.curdir = Direction.Left;
+					if (Player2.Curdir != Direction.Right)
+						Player2.Curdir = Direction.Left;
 					break;
 				case Keys.L:
-					if (Player2.curdir != Direction.Left)
-						Player2.curdir = Direction.Right;
+					if (Player2.Curdir != Direction.Left)
+						Player2.Curdir = Direction.Right;
 					break;
 				case Keys.I:
-					if (Player2.curdir != Direction.Down)
-						Player2.curdir = Direction.Up;
+					if (Player2.Curdir != Direction.Down)
+						Player2.Curdir = Direction.Up;
 					break;
 				case Keys.K:
-					if (Player2.curdir != Direction.Up)
-						Player2.curdir = Direction.Down;
+					if (Player2.Curdir != Direction.Up)
+						Player2.Curdir = Direction.Down;
 					break;
 
 			}
@@ -344,11 +303,11 @@ void CreatFood()
 
         }
 
-        public void CollideWall()
+        public void CheckCollideWall()
 		{
 			if (Player1 != null)
 			{
-				if (Player1.Snake[0].X < 0 || Player1.Snake[0].X > 765 || Player1.Snake[0].Y < 0 || Player1.Snake[0].Y > 565)
+				if (Player1.Snake[0].X < 0 || Player1.Snake[0].X > Form.ClientRectangle.Width-Dot.SIZE || Player1.Snake[0].Y < 0 || Player1.Snake[0].Y > Form.ClientRectangle.Height-Dot.SIZE)
 				{
 					Player1.Count = 0;
 					if(Player2 == null)
@@ -365,7 +324,7 @@ void CreatFood()
 
 			if(Player2 != null)
 			{
-				if (Player2.Snake[0].X < 0 || Player2.Snake[0].X > 790|| Player2.Snake[0].Y < 0 || Player2.Snake[0].Y > 590)
+				if (Player2.Snake[0].X < 0 || Player2.Snake[0].X > Form.ClientRectangle.Width - Dot.SIZE|| Player2.Snake[0].Y < 0 || Player2.Snake[0].Y > Form.ClientRectangle.Height - Dot.SIZE)
 				{
 					Player2.Count = 0;
 					if (Player2 == null)

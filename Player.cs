@@ -1,10 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 using System.Drawing;
-using System.Threading.Tasks;
 
 namespace SnakeProjekt
 {
@@ -14,12 +8,13 @@ namespace SnakeProjekt
     public class Player
     {
 
-        public Dot[] Snake{ get; set; }
+        private int speed = Dot.SIZE;
+        private int score = 0;
+        private Direction curdir = Direction.Up;
+
+        public Dot[] Snake { get; set; }
         public int Count { get; set; }
-        int Speed = 25;
-        int score = 0;
-        private Direction CurDir = Direction.Up;
-        public Direction curdir { get => CurDir; set => CurDir = value; }
+        public Direction Curdir { get => curdir; set => curdir = value; }
         public int Score { get => score; set => score = value; }
         SolidBrush PlayerBrush;
         Engine Engine;
@@ -29,7 +24,7 @@ namespace SnakeProjekt
             Snake = new Dot[999];
             Engine = engine;
             Count = 3;
-            int SpawnX = 375;
+            int SpawnX = Engine.WIDTH/2 - Dot.SIZE;
       
             if (color == PlayerColor.Green)
             {
@@ -52,31 +47,36 @@ namespace SnakeProjekt
         public void Tick()
         {
 
-            Move(CurDir);
-            foreach (Food food in Engine.FoodList)
-            {
-                if (Snake[0].X == food.x && Snake[0].Y == food.y)
+            Move(Curdir);
+            Food food = Engine.food;
+                if (Snake[0].X == food.X && Snake[0].Y == food.Y)
                 {
-                    switch (1) //NOTE: CHANGE LATER§§
+                    if(food.Type == FoodType.standard)
                     {
-                        case 1:
+                            Snake[Count] = new Dot(Snake[Count-1].X, Snake[Count-1].Y);
                             Count++;
-                            break;
-
-                        case 2:
-                            Count++;
-                            break;
-
-                        case -1:
-                            if (Count > 1)
-                                Count--;
-                            break;
+                            Score++;
+                        
                     }
+                    else if(food.Type == FoodType.valuable)
+                    {
+                            
+                            Snake[Count] = new Dot(Snake[Count-1].X, Snake[Count-1].Y);
+                            Count++;
+                            Score+=5;
 
+                    }
+                    else if(food.Type == FoodType.diet)
+                    {
+                            
+                            Snake[Count] = new Dot(Snake[Count-1].X, Snake[Count-1].Y);
+                            Count++;
 
-                }
-            }
-            Engine.CollideWall();
+                    } 
+                    Engine.SpawnFood();
+                }  
+            
+            Engine.CheckCollideWall();
             Engine.CollidePlayer();
         }
 
@@ -100,16 +100,16 @@ namespace SnakeProjekt
             switch (d) // Move head
             {
                 case Direction.Up:
-                    Snake[0].Y -= Speed;
+                    Snake[0].Y -= speed;
                     break;
                 case Direction.Down:
-                    Snake[0].Y += Speed;
+                    Snake[0].Y += speed;
                     break;
                 case Direction.Left:
-                    Snake[0].X -= Speed;
+                    Snake[0].X -= speed;
                     break;
                 case Direction.Right:
-                    Snake[0].X += Speed;
+                    Snake[0].X += speed;
                     break;
             }
 

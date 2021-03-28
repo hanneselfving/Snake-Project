@@ -16,10 +16,11 @@ namespace SnakeProjekt
         {
             InitializeComponent();
             Text = "Snake";
-            Width = 790;
-            Height = 590;
+            Width = 800;
+            Height = 600;
             DoubleBuffered = true;
             BackColor = Color.Black;
+            
         }
     }
 }

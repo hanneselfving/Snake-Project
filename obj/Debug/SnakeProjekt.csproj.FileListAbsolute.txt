@@ -34,3 +34,13 @@ C:\Users\Hannes\Source\Repos\Snake-ProjectNy\obj\Debug\SnakeProjekt.csproj.Gener
 C:\Users\Hannes\Source\Repos\Snake-ProjectNy\obj\Debug\SnakeProjekt.csproj.CoreCompileInputs.cache
 C:\Users\Hannes\Source\Repos\Snake-ProjectNy\obj\Debug\SnakeProjekt.exe
 C:\Users\Hannes\Source\Repos\Snake-ProjectNy\obj\Debug\SnakeProjekt.pdb
+C:\Users\hanne\Source\Repos\Snake-Project\bin\Debug\SnakeProjekt.exe.config
+C:\Users\hanne\Source\Repos\Snake-Project\bin\Debug\SnakeProjekt.exe
+C:\Users\hanne\Source\Repos\Snake-Project\bin\Debug\SnakeProjekt.pdb
+C:\Users\hanne\Source\Repos\Snake-Project\obj\Debug\SnakeProjekt.csprojAssemblyReference.cache
+C:\Users\hanne\Source\Repos\Snake-Project\obj\Debug\SnakeProjekt.Properties.Resources.resources
+C:\Users\hanne\Source\Repos\Snake-Project\obj\Debug\SnakeProjekt.csproj.GenerateResource.cache
+C:\Users\hanne\Source\Repos\Snake-Project\obj\Debug\SnakeProjekt.csproj.CoreCompileInputs.cache
+C:\Users\hanne\Source\Repos\Snake-Project\obj\Debug\SnakeProjekt.exe
+C:\Users\hanne\Source\Repos\Snake-Project\obj\Debug\SnakeProjekt.pdb
+C:\Users\hanne\Source\Repos\Snake-Project\obj\Debug\SnakeProjekt.MainForm.resources

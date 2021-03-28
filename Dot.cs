@@ -6,6 +6,9 @@ public class Dot
 	int x = 0;
 	int y = 0;
 
+	public readonly static int SIZE = 20;
+	public Rectangle DotRect;
+
 	public int X
 	{
 		get
@@ -34,13 +37,11 @@ public class Dot
 		}
 	}
 
-	public readonly static int SIZE = 25;
-	public Rectangle DotRect;
-
 	public Dot(int x, int y)
 	{
 		X = x;
 		Y = y;
+
 		DotRect = new Rectangle(x, y, SIZE, SIZE);
 
 	}

@@ -29,10 +29,19 @@ namespace SnakeProjekt
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.SuspendLayout();
+            // 
+            // MainForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.ClientSize = new System.Drawing.Size(1924, 1181);
+            this.DoubleBuffered = true;
+            this.Margin = new System.Windows.Forms.Padding(48, 22, 48, 22);
+            this.Name = "MainForm";
             this.Text = "Form1";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
