@@ -45,3 +45,4 @@ C:\Users\hanne\Source\Repos\Snake-Project\obj\Debug\SnakeProjekt.exe
 C:\Users\hanne\Source\Repos\Snake-Project\obj\Debug\SnakeProjekt.pdb
 C:\Users\hanne\Source\Repos\Snake-Project\obj\Debug\SnakeProjekt.MainForm.resources
 C:\Users\erik\Google Drive\Skolan\Mälardalens högskola datavetenskap 2020\Obejektorienterad programmering DVA222\SnakeProjekt\obj\Debug\SnakeProjekt.MainForm.resources
+C:\Users\malin\source\repos\hanneselfving\Snake-Project\obj\Debug\SnakeProjekt.MainForm.resources

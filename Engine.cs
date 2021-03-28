@@ -9,7 +9,7 @@ namespace SnakeProjekt
 	public class Engine
 	{
 		private MainForm Form = new MainForm();
-		
+
 		private Timer Timer = new Timer();
 		private const int FPS = 10;
 		public static int WIDTH = 760;
@@ -28,11 +28,11 @@ namespace SnakeProjekt
 		public bool GameOver { get => gameOver; set => gameOver = value; }
 
 		public Engine()
-        {
+		{
 			Player1 = new Player(PlayerColor.Blue, this);
 			Player2 = new Player(PlayerColor.Green, this);
 			SpawnFood();
-        }
+		}
 
 
 		public void Run()
@@ -59,56 +59,59 @@ namespace SnakeProjekt
 		void Render(Object obj, PaintEventArgs args)
 		{
 
-				if(Running) { 
-			
-				if(food != null)
-				food.Render(args.Graphics);
-            
+			if (Running)
+			{
+
+				if (food != null)
+					food.Render(args.Graphics);
+
 				drawBrush.Color = Color.Blue;
 				args.Graphics.DrawString($"{Player1.Score}", drawFont, drawBrush, 5, 5);
 
-				if(Player2  != null) { 
-				drawBrush.Color = Color.Green;
-				args.Graphics.DrawString($"{Player2.Score}", drawFont, drawBrush, 759, 5);
+				if (Player2 != null)
+				{
+					drawBrush.Color = Color.Green;
+					args.Graphics.DrawString($"{Player2.Score}", drawFont, drawBrush, 759, 5);
 				}
 				drawBrush.Color = Color.White;
 			}
 
 			Player1.Render(args.Graphics);
-			if(Player2 != null) {
+			if (Player2 != null)
+			{
 				Player2.Render(args.Graphics);
 			}
 
 
 
-			if(!running)
-            {
-				if(GameOver && Player2 != null) 
-				{ 
-					if(Player1.Score == Player2.Score)
-                    {
+			if (!running)
+			{
+				if (GameOver && Player2 != null)
+				{
+					if (Player1.Score == Player2.Score)
+					{
 						args.Graphics.DrawString("Tie!", drawFont, drawBrush, 320, 10);
-                    }
-					else if(Player1.Score > Player2.Score)
-                    {
+					}
+					else if (Player1.Score > Player2.Score)
+					{
 						args.Graphics.DrawString("Blue Player is Victorious!", drawFont, drawBrush, 300, 10);
-                    }
-					if(Player1.Score < Player2.Score)
-                    {
+					}
+					if (Player1.Score < Player2.Score)
+					{
 						args.Graphics.DrawString("Green Player is Victorious!", drawFont, drawBrush, 300, 10);
-                    }
+					}
 					args.Graphics.DrawString("Press F to continue", drawFont, drawBrush, 305, 30);
 				}
-				else 
-				{ 
-				args.Graphics.DrawString("Press F to run", drawFont, drawBrush, 305, 10);
-				args.Graphics.DrawString("Controls: WASD and IJKL", drawFont, drawBrush, 265, 30);
-				args.Graphics.DrawString("Press T to toggle number of players", drawFont, drawBrush, 265, 50);
-				//args.Graphics.DrawString($"W:{Form.Size.Width} H:{Form.Size.Height}", drawFont, drawBrush, 300, 50);
+				else
+				{
+					args.Graphics.DrawString("Press F to run", drawFont, drawBrush, 305, 10);
+					args.Graphics.DrawString("Controls: WASD and IJKL", drawFont, drawBrush, 265, 30);
+					args.Graphics.DrawString("Press T to toggle number of players", drawFont, drawBrush, 265, 50);
+					//args.Graphics.DrawString($"W:{Form.Size.Width} H:{Form.Size.Height}", drawFont, drawBrush, 300, 50);
 				}
-            }
+			}
 		}
-		
+
 		public void SpawnFood()
 		{
 			food = null;
@@ -128,12 +131,12 @@ namespace SnakeProjekt
 					break;
 
 			}
-				Console.WriteLine(food.X);
-				Console.WriteLine(food.Y);
+			Console.WriteLine(food.X);
+			Console.WriteLine(food.Y);
 		}
 
 		void SetFoodPosition(ref int x, ref int y)
-        {
+		{
 			Random rand = new Random();
 
 			do
@@ -143,33 +146,33 @@ namespace SnakeProjekt
 
 			} while (x > 70 && y > 17 && x < 701);
 		}
-		
+
 		void Tick()
 		{
-			if(Running) 
-			{ 
+			if (Running)
+			{
 				Player1.Tick();
-				if(Player2 != null)
+				if (Player2 != null)
 					Player2.Tick();
 
-					if(food != null)
+				if (food != null)
 					food.Tick();
 
-				
+
 			}
-        }
+		}
 
 		private void TogglePlayerNumber()
-        {
-			if(Player2  != null)
-                   {
-						Player2 = null;
-                   }
+		{
+			if (Player2 != null)
+			{
+				Player2 = null;
+			}
 			else
-                   {
-						Player2 = new Player(PlayerColor.Green, this);
-                   }
-        }
+			{
+				Player2 = new Player(PlayerColor.Green, this);
+			}
+		}
 
 		// Handle the KeyDown.
 		private void OnKeyDown(object sender, KeyEventArgs e)
@@ -177,24 +180,24 @@ namespace SnakeProjekt
 			switch (e.KeyCode)
 			{
 				case Keys.F:
-					if(GameOver || Running)
-                    {
+					if (GameOver || Running)
+					{
 						Reset();
-                    }
-                    else 
-					{ 
-					Running = true; //Replace with StartRunning-Method (perhaps) 
+					}
+					else
+					{
+						Running = true; //Replace with StartRunning-Method (perhaps) 
 					}
 					break;
 				case Keys.T:
-					if(!Running && !GameOver)
-                    { 
+					if (!Running && !GameOver)
+					{
 						TogglePlayerNumber();
-                    }
+					}
 					break;
 
 				case Keys.A:
-					if(Player1.Curdir != Direction.Right)
+					if (Player1.Curdir != Direction.Right)
 						Player1.Curdir = Direction.Left;
 					break;
 				case Keys.D:
@@ -231,44 +234,29 @@ namespace SnakeProjekt
 		}
 
 		public void DoGameOver()
-        {
+		{
 			Running = false;
 			GameOver = true;
 
-        }
+		}
 
 		public void Reset()
-        {
+		{
 			Running = false;
 			GameOver = false;
 			Player1 = new Player(PlayerColor.Blue, this);
-			if(Player2 != null)
+			if (Player2 != null)
 				Player2 = new Player(PlayerColor.Green, this);
-        }
+		}
 
 		public void CollidePlayer()
-        {
+		{
 			bool HasCollided1 = false;
 			bool HasCollided2 = false;
 
+
 			if (Player2 != null)
-				{
-					for (int k = 1; k < Player1.Count; k++)
-				{
-					if (Player1.Snake[0].DotRect.IntersectsWith(Player1.Snake[k].DotRect))
-					{
-						Player1.Count = 0;
-					}
-				}
-
-				for (int k = 1; k < Player2.Count; k++)
-				{
-					if (Player2.Snake[0].DotRect.IntersectsWith(Player2.Snake[k].DotRect))
-					{
-						Player2.Count = 0;
-					}
-				}
-
+			{
 				for (int k = 0; k < Player2.Count; k++)
 				{
 					if (Player1.Snake[0].DotRect.IntersectsWith(Player2.Snake[k].DotRect))
@@ -279,7 +267,7 @@ namespace SnakeProjekt
 					}
 				}
 
-				for (int k = 0; k < Player2.Count; k++)
+				for (int k = 0; k < Player1.Count; k++)
 				{
 					if (Player2.Snake[0].DotRect.IntersectsWith(Player1.Snake[k].DotRect))
 					{
@@ -302,20 +290,38 @@ namespace SnakeProjekt
 					HasCollided2 = false;
 				}
 			}
+		}
+		public void CollideSelf()
+		{
+			for (int k = 1; k < Player1.Count; k++)
+			{
+				if (Player1.Snake[0].DotRect.IntersectsWith(Player1.Snake[k].DotRect))
+				{
+					Player1.Count = 0;
+				}
+			}
 
-        }
+			for (int k = 1; k < Player2.Count; k++)
+			{
+				if (Player2.Snake[0].DotRect.IntersectsWith(Player2.Snake[k].DotRect))
+				{
+					Player2.Count = 0;
+				}
+			}
 
-        public void CheckCollideWall()
+		}
+
+		public void CheckCollideWall()
 		{
 			if (Player1 != null)
 			{
-				if (Player1.Snake[0].X < 0 || Player1.Snake[0].X > Form.ClientRectangle.Width-Dot.SIZE || Player1.Snake[0].Y < 0 || Player1.Snake[0].Y > Form.ClientRectangle.Height-Dot.SIZE)
+				if (Player1.Snake[0].X < 0 || Player1.Snake[0].X > Form.ClientRectangle.Width - Dot.SIZE || Player1.Snake[0].Y < 0 || Player1.Snake[0].Y > Form.ClientRectangle.Height - Dot.SIZE)
 				{
 					Player1.Count = 0;
-					if(Player2 == null)
-                    {
+					if (Player2 == null)
+					{
 						DoGameOver();
-                    }
+					}
 					if (Player2 != null)
 					{
 						if (Player2.Count == 0)
@@ -324,9 +330,9 @@ namespace SnakeProjekt
 				}
 			}
 
-			if(Player2 != null)
+			if (Player2 != null)
 			{
-				if (Player2.Snake[0].X < 0 || Player2.Snake[0].X > Form.ClientRectangle.Width - Dot.SIZE|| Player2.Snake[0].Y < 0 || Player2.Snake[0].Y > Form.ClientRectangle.Height - Dot.SIZE)
+				if (Player2.Snake[0].X < 0 || Player2.Snake[0].X > Form.ClientRectangle.Width - Dot.SIZE || Player2.Snake[0].Y < 0 || Player2.Snake[0].Y > Form.ClientRectangle.Height - Dot.SIZE)
 				{
 					Player2.Count = 0;
 					if (Player2 == null)
@@ -343,4 +349,5 @@ namespace SnakeProjekt
 		}
 
 	}
+
 }

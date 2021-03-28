@@ -75,8 +75,9 @@ namespace SnakeProjekt
 
                     } 
                     Engine.SpawnFood();
-                }  
-            
+                }
+
+            Engine.CollideSelf();
             Engine.CheckCollideWall();
             Engine.CollidePlayer();
         }
