@@ -50,32 +50,37 @@ namespace SnakeProjekt
             Move(Curdir);
             Food food = Engine.food;
 
-                if (Snake[0].X == food.X && Snake[0].Y == food.Y)
+            if (Snake[0].X == food.X && Snake[0].Y == food.Y) 
+            {
+                if (food.Type == FoodType.standard)
                 {
-                    if(food.Type == FoodType.standard)
-                    {
-                            Snake[Count] = new Dot(Snake[Count-1].X, Snake[Count-1].Y);
-                            Count++;
-                            Score++;
-                        
-                    }
-                    else if(food.Type == FoodType.valuable)
-                    {
-                            
-                            Snake[Count] = new Dot(Snake[Count-1].X, Snake[Count-1].Y);
-                            Count++;
-                            Score+=5;
+                    Snake[Count] = new Dot(Snake[Count - 1].X, Snake[Count - 1].Y);
+                    Count++;
+                    Score++;
 
-                    }
-                    else if(food.Type == FoodType.diet)
-                    {
-                            
-                            Snake[Count] = new Dot(Snake[Count-1].X, Snake[Count-1].Y);
-                            Count++;
-
-                    } 
-                    Engine.SpawnFood();
                 }
+                else if (food.Type == FoodType.valuable)
+                {
+
+                    Snake[Count] = new Dot(Snake[Count - 1].X, Snake[Count - 1].Y);
+                    Snake[Count+1] = new Dot(Snake[Count].X, Snake[Count].Y);
+                    Count += 2;
+                    Score += 5;
+
+                }
+                else if (food.Type == FoodType.diet)
+                {
+
+                    Snake[Count] = new Dot(Snake[Count - 1].X, Snake[Count - 1].Y);
+                    if (Count > 3)
+                    {
+                        Count--;
+                    }
+                    Score++;
+
+                }
+                Engine.SpawnFood();
+            }
 
             Engine.CollideSelf();
             Engine.CheckCollideWall();
